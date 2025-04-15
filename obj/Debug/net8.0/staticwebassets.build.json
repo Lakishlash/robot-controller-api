@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "vjvAHYeO4gshYDYXsZ4l5GqXGCyaHc4noP9Le6iZ1Jw=",
+  "Source": "robot-controller-api",
+  "BasePath": "_content/robot-controller-api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
