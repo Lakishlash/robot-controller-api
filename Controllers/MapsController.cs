@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using RobotControllerApi.Models;
+using RobotControllerApi.Persistence;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,23 +11,26 @@ namespace RobotControllerApi.Controllers
     [Route("api/maps")]
     public class MapsController : ControllerBase
     {
-        // In-memory list to hold maps
-        private static readonly List<Map> _maps = new List<Map>
-        {
-            new Map(1, 5, 5, "MOON", null, DateTime.Now, DateTime.Now)
-        };
-
         [HttpGet]
-        public IEnumerable<Map> GetAllMaps() => _maps;
+        public ActionResult<IEnumerable<Map>> GetAllMaps()
+        {
+            var all = MapDataAccess.GetMaps();
+            return Ok(all);
+        }
 
         [HttpGet("square")]
-        public IEnumerable<Map> GetSquareMaps() =>
-            _maps.Where(m => m.Columns == m.Rows);
+        public ActionResult<IEnumerable<Map>> GetSquareMaps()
+        {
+            var square = MapDataAccess
+                .GetMaps()
+                .Where(m => m.Columns == m.Rows);
+            return Ok(square);
+        }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetMap")]
         public IActionResult GetMapById(int id)
         {
-            var map = _maps.FirstOrDefault(m => m.Id == id);
+            var map = MapDataAccess.GetMapById(id);
             if (map == null)
                 return NotFound($"Map with ID {id} not found.");
             return Ok(map);
@@ -36,43 +40,49 @@ namespace RobotControllerApi.Controllers
         public IActionResult AddMap([FromBody] Map newMap)
         {
             if (newMap == null)
-                return BadRequest();
-            if (newMap.Columns != newMap.Rows || newMap.Columns < 2 || newMap.Columns > 100)
-                return BadRequest("Map must be square and size must be between 2 and 100.");
+                return BadRequest("Request body required.");
 
-            int newId = _maps.Max(m => m.Id) + 1;
-            newMap.Id = newId;
-            newMap.CreatedDate = DateTime.Now;
-            newMap.ModifiedDate = DateTime.Now;
-            _maps.Add(newMap);
-            return CreatedAtAction(nameof(GetMapById), new { id = newMap.Id }, newMap);
+            if (newMap.Columns != newMap.Rows ||
+                newMap.Columns < 2 || newMap.Columns > 100)
+            {
+                return BadRequest("Map must be square and size between 2 and 100.");
+            }
+
+            var created = MapDataAccess.AddMap(newMap);
+            return CreatedAtRoute(
+                "GetMap",
+                new { id = created.Id },
+                created
+            );
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpdateMap(int id, [FromBody] Map updatedMap)
+        public IActionResult UpdateMap(int id, [FromBody] Map upd)
         {
-            var existing = _maps.FirstOrDefault(m => m.Id == id);
+            if (upd == null || upd.Id != id)
+                return BadRequest("ID mismatch or body missing.");
+
+            if (upd.Columns != upd.Rows ||
+                upd.Columns < 2 || upd.Columns > 100)
+            {
+                return BadRequest("Map must be square and size between 2 and 100.");
+            }
+
+            var existing = MapDataAccess.GetMapById(id);
             if (existing == null)
                 return NotFound($"Map with ID {id} not found.");
 
-            if (updatedMap.Columns != updatedMap.Rows || updatedMap.Columns < 2 || updatedMap.Columns > 100)
-                return BadRequest("Map must be square and size must be between 2 and 100.");
-
-            existing.Name = updatedMap.Name;
-            existing.Description = updatedMap.Description;
-            existing.Columns = updatedMap.Columns;
-            existing.Rows = updatedMap.Rows;
-            existing.ModifiedDate = DateTime.Now;
-            return NoContent();
+            upd.ModifiedDate = DateTime.Now;
+            bool ok = MapDataAccess.UpdateMap(upd);
+            return ok ? NoContent() : StatusCode(500, "Update failed.");
         }
 
         [HttpDelete("{id}")]
         public IActionResult DeleteMap(int id)
         {
-            var map = _maps.FirstOrDefault(m => m.Id == id);
-            if (map == null)
+            bool deleted = MapDataAccess.DeleteMap(id);
+            if (!deleted)
                 return NotFound($"Map with ID {id} not found.");
-            _maps.Remove(map);
             return NoContent();
         }
 
@@ -80,8 +90,9 @@ namespace RobotControllerApi.Controllers
         public IActionResult CheckCoordinate(int id, int x, int y)
         {
             if (x < 0 || y < 0)
-                return BadRequest("Coordinates must be non-negative.");
-            var map = _maps.FirstOrDefault(m => m.Id == id);
+                return BadRequest("Coordinates must be non‑negative.");
+
+            var map = MapDataAccess.GetMapById(id);
             if (map == null)
                 return NotFound($"Map with ID {id} not found.");
 

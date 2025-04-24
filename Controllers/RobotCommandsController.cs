@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using RobotControllerApi.Models;
+using RobotControllerApi.Persistence;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,69 +11,73 @@ namespace RobotControllerApi.Controllers
     [Route("api/robot-commands")]
     public class RobotCommandsController : ControllerBase
     {
-        // In-memory list to hold commands
-        private static readonly List<RobotCommand> _commands = new List<RobotCommand>
-        {
-            new RobotCommand(1, "PLACE", false, DateTime.Now, DateTime.Now),
-            new RobotCommand(2, "MOVE", true, DateTime.Now, DateTime.Now),
-            new RobotCommand(3, "LEFT", true, DateTime.Now, DateTime.Now),
-            new RobotCommand(4, "RIGHT", true, DateTime.Now, DateTime.Now),
-            new RobotCommand(5, "REPORT", false, DateTime.Now, DateTime.Now)
-        };
-
         [HttpGet]
-        public IEnumerable<RobotCommand> GetAllRobotCommands() => _commands;
+        public ActionResult<IEnumerable<RobotCommand>> GetAllRobotCommands()
+        {
+            var all = RobotCommandDataAccess.GetRobotCommands();
+            return Ok(all);
+        }
 
         [HttpGet("move")]
-        public IEnumerable<RobotCommand> GetMoveCommandsOnly() =>
-            _commands.Where(c => c.IsMoveCommand);
+        public ActionResult<IEnumerable<RobotCommand>> GetMoveCommandsOnly()
+        {
+            var moves = RobotCommandDataAccess
+                .GetRobotCommands()
+                .Where(c => c.IsMoveCommand);
+            return Ok(moves);
+        }
 
         [HttpGet("{id}", Name = "GetRobotCommand")]
         public IActionResult GetRobotCommandById(int id)
         {
-            var command = _commands.FirstOrDefault(c => c.Id == id);
-            if (command == null)
+            var cmd = RobotCommandDataAccess.GetRobotCommandById(id);
+            if (cmd == null)
                 return NotFound($"Command with ID {id} not found.");
-            return Ok(command);
+            return Ok(cmd);
         }
 
         [HttpPost]
-        public IActionResult AddRobotCommand([FromBody] RobotCommand newCommand)
+        public IActionResult AddRobotCommand([FromBody] RobotCommand newCmd)
         {
-            if (newCommand == null)
-                return BadRequest();
-            if (_commands.Any(c => c.Name.Equals(newCommand.Name, StringComparison.OrdinalIgnoreCase)))
-                return Conflict($"Command with name {newCommand.Name} already exists.");
+            if (newCmd == null)
+                return BadRequest("Request body required.");
 
-            int newId = _commands.Max(c => c.Id) + 1;
-            newCommand.Id = newId;
-            newCommand.CreatedDate = DateTime.Now;
-            newCommand.ModifiedDate = DateTime.Now;
-            _commands.Add(newCommand);
-            return CreatedAtRoute("GetRobotCommand", new { id = newCommand.Id }, newCommand);
+            // Prevent duplicate names
+            var exists = RobotCommandDataAccess
+                .GetRobotCommands()
+                .Any(c => c.Name.Equals(newCmd.Name, StringComparison.OrdinalIgnoreCase));
+            if (exists)
+                return Conflict($"Command '{newCmd.Name}' already exists.");
+
+            var created = RobotCommandDataAccess.AddRobotCommand(newCmd);
+            return CreatedAtRoute(
+                "GetRobotCommand",
+                new { id = created.Id },
+                created
+            );
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpdateRobotCommand(int id, [FromBody] RobotCommand updatedCommand)
+        public IActionResult UpdateRobotCommand(int id, [FromBody] RobotCommand upd)
         {
-            var existing = _commands.FirstOrDefault(c => c.Id == id);
+            if (upd == null || upd.Id != id)
+                return BadRequest("ID mismatch or body missing.");
+
+            var existing = RobotCommandDataAccess.GetRobotCommandById(id);
             if (existing == null)
                 return NotFound($"Command with ID {id} not found.");
 
-            existing.Name = updatedCommand.Name;
-            existing.IsMoveCommand = updatedCommand.IsMoveCommand;
-            existing.Description = updatedCommand.Description;
-            existing.ModifiedDate = DateTime.Now;
-            return NoContent();
+            upd.ModifiedDate = DateTime.Now;
+            bool ok = RobotCommandDataAccess.UpdateRobotCommand(upd);
+            return ok ? NoContent() : StatusCode(500, "Update failed.");
         }
 
         [HttpDelete("{id}")]
         public IActionResult DeleteRobotCommand(int id)
         {
-            var command = _commands.FirstOrDefault(c => c.Id == id);
-            if (command == null)
+            bool deleted = RobotCommandDataAccess.DeleteRobotCommand(id);
+            if (!deleted)
                 return NotFound($"Command with ID {id} not found.");
-            _commands.Remove(command);
             return NoContent();
         }
     }

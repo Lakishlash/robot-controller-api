@@ -4,13 +4,16 @@ using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// 1. Add controllers
 builder.Services.AddControllers();
+
+// (Optional) Add Swagger for dev-time API docs
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+// 2. Enable middleware
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -19,8 +22,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
-
+// 3. Map attribute‑routed controllers
 app.MapControllers();
 
 app.Run();

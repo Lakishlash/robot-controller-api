@@ -34,3 +34,5 @@
 /Users/lakishwijewardene/Documents/Projects/robot-controller-api/obj/Debug/net8.0/robot-controller-api.pdb
 /Users/lakishwijewardene/Documents/Projects/robot-controller-api/obj/Debug/net8.0/robot-controller-api.genruntimeconfig.cache
 /Users/lakishwijewardene/Documents/Projects/robot-controller-api/obj/Debug/net8.0/ref/robot-controller-api.dll
+/Users/lakishwijewardene/Documents/Projects/robot-controller-api/bin/Debug/net8.0/Npgsql.dll
+/Users/lakishwijewardene/Documents/Projects/robot-controller-api/obj/Debug/net8.0/robot-controller-api.sourcelink.json
