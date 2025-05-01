@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FastMember.Signed" Version="1.5.0" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.14" />
     <PackageReference Include="Npgsql" Version="7.0.7" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />

@@ -1,19 +1,26 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using robot_controller_api.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// 1. Add controllers
+// Register ADO implementations for dependency injection
+builder.Services.AddScoped<IRobotCommandDataAccess, RobotCommandADO>();
+builder.Services.AddScoped<IMapDataAccess, MapADO>();
+builder.Services.AddScoped<IRobotCommandDataAccess, RobotCommandRepository>();
+builder.Services.AddScoped<IMapDataAccess, MapRepository>();
+
+// Add controllers
 builder.Services.AddControllers();
 
-// (Optional) Add Swagger for dev-time API docs
+// Swagger for API docs
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// 2. Enable middleware
+// Enable middleware
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -22,7 +29,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-// 3. Map attribute‑routed controllers
+// Map attribute-routed controllers
 app.MapControllers();
 
 app.Run();

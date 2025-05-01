@@ -2,6 +2,15 @@
   "version": 3,
   "targets": {
     "net8.0": {
+      "FastMember.Signed/1.5.0": {
+        "type": "package",
+        "compile": {
+          "lib/netcoreapp2.0/FastMember.Signed.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp2.0/FastMember.Signed.dll": {}
+        }
+      },
       "Microsoft.AspNetCore.OpenApi/8.0.14": {
         "type": "package",
         "dependencies": {
@@ -143,6 +152,20 @@
     }
   },
   "libraries": {
+    "FastMember.Signed/1.5.0": {
+      "sha512": "tZofx7AYyAI6w2kvbf/QjpEAC/A4cLInv1WSlMgISTIxGtgU8IUMvW3Y3Alkdx3atgaRxRch/SU6fmzjVmyYog==",
+      "type": "package",
+      "path": "fastmember.signed/1.5.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "fastmember.signed.1.5.0.nupkg.sha512",
+        "fastmember.signed.nuspec",
+        "lib/net461/FastMember.Signed.dll",
+        "lib/netcoreapp2.0/FastMember.Signed.dll",
+        "lib/netstandard2.0/FastMember.Signed.dll"
+      ]
+    },
     "Microsoft.AspNetCore.OpenApi/8.0.14": {
       "sha512": "Sar0lozRpDmlAfzRNHtr8hC/6ImdcZMYA1JLoEaW0bmRvQdPpsN0orHYGsY+/LYS3q603ZomxsYpXj1Ow+sBTA==",
       "type": "package",
@@ -586,6 +609,7 @@
   },
   "projectFileDependencyGroups": {
     "net8.0": [
+      "FastMember.Signed >= 1.5.0",
       "Microsoft.AspNetCore.OpenApi >= 8.0.14",
       "Npgsql >= 7.0.7",
       "Swashbuckle.AspNetCore >= 6.6.2"
@@ -597,11 +621,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/lakishwijewardene/Documents/Projects/robot-controller-api/robot-controller-api.csproj",
+      "projectUniqueName": "/Users/lakishwijewardene/Documents/Projects/robot-controller-api-4.2C/robot-controller-api.csproj",
       "projectName": "robot-controller-api",
-      "projectPath": "/Users/lakishwijewardene/Documents/Projects/robot-controller-api/robot-controller-api.csproj",
+      "projectPath": "/Users/lakishwijewardene/Documents/Projects/robot-controller-api-4.2C/robot-controller-api.csproj",
       "packagesPath": "/Users/lakishwijewardene/.nuget/packages/",
-      "outputPath": "/Users/lakishwijewardene/Documents/Projects/robot-controller-api/obj/",
+      "outputPath": "/Users/lakishwijewardene/Documents/Projects/robot-controller-api-4.2C/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/lakishwijewardene/.nuget/NuGet/NuGet.Config"
@@ -634,6 +658,10 @@
       "net8.0": {
         "targetAlias": "net8.0",
         "dependencies": {
+          "FastMember.Signed": {
+            "target": "Package",
+            "version": "[1.5.0, )"
+          },
           "Microsoft.AspNetCore.OpenApi": {
             "target": "Package",
             "version": "[8.0.14, )"
