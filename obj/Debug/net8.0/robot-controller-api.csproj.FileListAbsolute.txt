@@ -75,3 +75,7 @@
 /Users/lakishwijewardene/Documents/Projects/robot-controller-api-4.2C/obj/Debug/net8.0/robot-co.046F2A72.Up2Date
 /Users/lakishwijewardene/Documents/Projects/robot-controller-api-4.2C/obj/Debug/net8.0/robot-controller-api.genruntimeconfig.cache
 /Users/lakishwijewardene/Documents/Projects/robot-controller-api-4.2C/obj/Debug/net8.0/ref/robot-controller-api.dll
+/Users/lakishwijewardene/Documents/Projects/robot-controller-api/bin/Debug/net8.0/FastMember.Signed.dll
+/Users/lakishwijewardene/Documents/Projects/robot-controller-api/bin/Debug/net8.0/robot-controller-api.staticwebassets.runtime.json
+/Users/lakishwijewardene/Documents/Projects/robot-controller-api/bin/Debug/net8.0/robot-controller-api.xml
+/Users/lakishwijewardene/Documents/Projects/robot-controller-api/obj/Debug/net8.0/robot-controller-api.xml

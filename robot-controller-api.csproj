@@ -5,13 +5,17 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>robot_controller_api</RootNamespace>
+    <!-- Emit XML docs for Swagger -->
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <!-- Suppress warnings for missing comments -->
+    <NoWarn>$(NoWarn);1591</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="FastMember.Signed" Version="1.5.0" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.14" />
     <PackageReference Include="Npgsql" Version="7.0.7" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="7.3.1" />
   </ItemGroup>
 
 </Project>

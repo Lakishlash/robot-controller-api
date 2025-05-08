@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>robot-controller-api</name>
+    </assembly>
+    <members>
+        <member name="M:robot_controller_api.Controllers.MapsController.GetAllMaps">
+            <summary>
+            Retrieves all saved maps.
+            </summary>
+        </member>
+        <member name="M:robot_controller_api.Controllers.MapsController.GetSquareMaps">
+            <summary>
+            Retrieves only the square maps (columns == rows).
+            </summary>
+        </member>
+        <member name="M:robot_controller_api.Controllers.MapsController.GetMapById(System.Int32)">
+            <summary>
+            Retrieves a single map by its ID.
+            </summary>
+            <param name="id">ID of the map to fetch.</param>
+        </member>
+        <member name="M:robot_controller_api.Controllers.MapsController.AddMap(robot_controller_api.Models.Map)">
+             <summary>
+             Creates a new square map.
+             </summary>
+             <param name="newMap">Map payload (must be square, size 2–100).</param>
+             <remarks>
+             Sample request:
+            
+                 POST /api/maps
+                 {
+                   "columns": 5,
+                   "rows": 5,
+                   "name": "Test5x5",
+                   "description": "A 5x5 grid"
+                 }
+             </remarks>
+        </member>
+        <member name="M:robot_controller_api.Controllers.MapsController.UpdateMap(System.Int32,robot_controller_api.Models.Map)">
+            <summary>
+            Updates an existing map.
+            </summary>
+            <param name="id">Map ID to update.</param>
+            <param name="upd">Updated map payload.</param>
+        </member>
+        <member name="M:robot_controller_api.Controllers.MapsController.DeleteMap(System.Int32)">
+            <summary>
+            Deletes a map by ID.
+            </summary>
+            <param name="id">ID of the map to delete.</param>
+        </member>
+        <member name="M:robot_controller_api.Controllers.MapsController.CheckCoordinate(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Checks whether a given (x,y) coordinate lies within the map bounds.
+            </summary>
+            <param name="id">Map ID.</param>
+            <param name="x">Column index (0-based).</param>
+            <param name="y">Row index (0-based).</param>
+        </member>
+        <member name="M:robot_controller_api.Controllers.RobotCommandsController.GetAllRobotCommands">
+            <summary>
+            Retrieves all robot commands.
+            </summary>
+        </member>
+        <member name="M:robot_controller_api.Controllers.RobotCommandsController.GetMoveCommandsOnly">
+            <summary>
+            Retrieves only the move commands (IsMoveCommand = true).
+            </summary>
+        </member>
+        <member name="M:robot_controller_api.Controllers.RobotCommandsController.GetRobotCommandById(System.Int32)">
+            <summary>
+            Retrieves a single command by its ID.
+            </summary>
+            <param name="id">ID of the robot command to fetch.</param>
+        </member>
+        <member name="M:robot_controller_api.Controllers.RobotCommandsController.AddRobotCommand(robot_controller_api.Models.RobotCommand)">
+             <summary>
+             Creates a new robot command.
+             </summary>
+             <param name="newCmd">The command object to create.</param>
+             <remarks>
+             Sample request:
+            
+                 POST /api/robot-commands
+                 {
+                   "name": "MoveForward",
+                   "isMoveCommand": true,
+                   "description": "Step ahead"
+                 }
+            
+             </remarks>
+        </member>
+        <member name="M:robot_controller_api.Controllers.RobotCommandsController.UpdateRobotCommand(System.Int32,robot_controller_api.Models.RobotCommand)">
+            <summary>
+            Updates an existing robot command.
+            </summary>
+            <param name="id">ID of the command to update.</param>
+            <param name="upd">Updated command object (must match ID in URL).</param>
+        </member>
+        <member name="M:robot_controller_api.Controllers.RobotCommandsController.DeleteRobotCommand(System.Int32)">
+            <summary>
+            Deletes a robot command by ID.
+            </summary>
+            <param name="id">ID of the command to delete.</param>
+        </member>
+        <member name="T:robot_controller_api.Persistence.ExtensionMethods">
+            <summary>
+            Extension methods for ADO data mapping
+            </summary>
+        </member>
+        <member name="M:robot_controller_api.Persistence.ExtensionMethods.MapTo``1(Npgsql.NpgsqlDataReader,``0)">
+            <summary>
+            Maps the current row of an NpgsqlDataReader onto an entity instance using FastMember
+            </summary>
+        </member>
+        <member name="M:robot_controller_api.Persistence.IRepository.ExecuteReader``1(System.String,Npgsql.NpgsqlParameter[])">
+            <summary>
+            Executes the given SQL command and maps each row into a new T via FastMember
+            </summary>
+        </member>
+    </members>
+</doc>
