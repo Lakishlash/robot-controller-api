@@ -1,45 +1,26 @@
 /* wwwroot/styles/robot.css */
 
-/*------------------------------------------------------------
-Load the web-optimized OpenDyslexic font
-------------------------------------------------------------*/
-@font-face {
-    font-family: "OpenDyslexic";
-    src: url("/fonts/OpenDyslexic-Regular.woff2") format("woff2");
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: "OpenDyslexic";
-    src: url("/fonts/OpenDyslexic-Bold.woff2") format("woff2");
-    font-weight: bold;
-    font-style: normal;
-    font-display: swap;
-}
-
-/*------------------------------------------------------------
-Force all Swagger UI text to use our font, add a bit more line-height & letter-spacing
-------------------------------------------------------------*/
+/*─────────────────────────────────────────────────────────
+  0) RESET EVERYTHING TO THE SYSTEM FONT
+─────────────────────────────────────────────────────────*/
 .swagger-ui,
 .swagger-ui * {
-    font-family: "OpenDyslexic", sans-serif !important;
-    line-height: 1.6 !important;
-    letter-spacing: 0.02em !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+    line-height: normal !important;
+    letter-spacing: normal !important;
 }
 
-/*------------------------------------------------------------
-Remove the default Swagger logo/icon
-------------------------------------------------------------*/
+/*─────────────────────────────────────────────────────────
+  1) Remove the default Swagger logo/icon
+─────────────────────────────────────────────────────────*/
 .swagger-ui .topbar .wrapper svg,
 .swagger-ui .topbar .wrapper img {
     display: none !important;
 }
 
-/*------------------------------------------------------------
-Inject the Deakin logo as a background
-------------------------------------------------------------*/
+/*─────────────────────────────────────────────────────────
+  2) Inject the Deakin logo as a background
+─────────────────────────────────────────────────────────*/
 .swagger-ui .topbar .wrapper {
     background: url("/images/deakin-logo.png") no-repeat left center !important;
     background-size: contain !important;
@@ -47,23 +28,23 @@ Inject the Deakin logo as a background
     padding-left: 100px !important;
 }
 
-/*------------------------------------------------------------
-Recolor the topbar strip (Deakin dark grey)
-------------------------------------------------------------*/
+/*─────────────────────────────────────────────────────────
+  3) Recolor the topbar strip (Deakin dark grey)
+─────────────────────────────────────────────────────────*/
 .swagger-ui .topbar {
     background-color: #1a1a1a !important;
 }
 
-/*------------------------------------------------------------
-Repaint the main UI background (light grey)
-------------------------------------------------------------*/
+/*─────────────────────────────────────────────────────────
+  4) Repaint the main UI background (light grey)
+─────────────────────────────────────────────────────────*/
 .swagger-ui {
     background-color: #f8f8f8 !important;
 }
 
-/*------------------------------------------------------------
-Tweak the version badge to Deakin red
-------------------------------------------------------------*/
+/*─────────────────────────────────────────────────────────
+  5) Tweak the version badge to Deakin red
+─────────────────────────────────────────────────────────*/
 .swagger-ui .info .title small:last-child {
     background-color: #EF1C25 !important;
     color: #fff !important;

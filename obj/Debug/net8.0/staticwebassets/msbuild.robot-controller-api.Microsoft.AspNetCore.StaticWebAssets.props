@@ -102,8 +102,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>xyq04ywdue</Fingerprint>
-      <Integrity>iRQixWrBUbRj4JbZZ60BVlrhdU8tqmAhBujEyY8if5U=</Integrity>
+      <Fingerprint>ufj4rjnwdz</Fingerprint>
+      <Integrity>li1TTTzbAtq5oVSwRSPu5vXIVY0zcA0G03Rj8pcb/j8=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\styles\robot.css'))</OriginalItemSpec>

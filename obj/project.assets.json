@@ -608,11 +608,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/lakishwijewardene/Documents/Projects/robot-controller-api/robot-controller-api.csproj",
+      "projectUniqueName": "/Users/lakishwijewardene/Documents/Projects/robot-controller-api-6.1P/robot-controller-api.csproj",
       "projectName": "robot-controller-api",
-      "projectPath": "/Users/lakishwijewardene/Documents/Projects/robot-controller-api/robot-controller-api.csproj",
+      "projectPath": "/Users/lakishwijewardene/Documents/Projects/robot-controller-api-6.1P/robot-controller-api.csproj",
       "packagesPath": "/Users/lakishwijewardene/.nuget/packages/",
-      "outputPath": "/Users/lakishwijewardene/Documents/Projects/robot-controller-api/obj/",
+      "outputPath": "/Users/lakishwijewardene/Documents/Projects/robot-controller-api-6.1P/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/lakishwijewardene/.nuget/NuGet/NuGet.Config"

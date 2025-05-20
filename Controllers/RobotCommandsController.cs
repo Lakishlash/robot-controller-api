@@ -1,124 +1,91 @@
+using System;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using robot_controller_api.Models;
 using robot_controller_api.Persistence;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace robot_controller_api.Controllers
 {
+    /// <summary>
+    /// CRUD and filters for robot commands.
+    /// </summary>
     [ApiController]
     [Route("api/robot-commands")]
+    [Authorize(Policy = "UserOnly")]
     public class RobotCommandsController : ControllerBase
     {
         private readonly IRobotCommandDataAccess _repo;
-
         public RobotCommandsController(IRobotCommandDataAccess repo)
-        {
-            _repo = repo;
-        }
+            => _repo = repo;
 
-        /// <summary>
-        /// Retrieves all robot commands.
-        /// </summary>
+        /// <summary>GET /api/robot-commands → all commands.</summary>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public ActionResult<IEnumerable<RobotCommand>> GetAllRobotCommands()
-            => Ok(_repo.GetRobotCommands());
+        public IActionResult GetAll() => Ok(_repo.GetRobotCommands());
 
-        /// <summary>
-        /// Retrieves only the move commands (IsMoveCommand = true).
-        /// </summary>
+        /// <summary>GET /api/robot-commands/move → move commands only.</summary>
         [HttpGet("move")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public ActionResult<IEnumerable<RobotCommand>> GetMoveCommandsOnly()
-            => Ok(_repo.GetRobotCommands().Where(c => c.IsMoveCommand));
+        public IActionResult GetMoves() => Ok(_repo.GetMoveCommands());
 
-        /// <summary>
-        /// Retrieves a single command by its ID.
-        /// </summary>
-        /// <param name="id">ID of the robot command to fetch.</param>
+        /// <summary>GET /api/robot-commands/{id} → single command.</summary>
         [HttpGet("{id}", Name = "GetRobotCommand")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult GetRobotCommandById(int id)
+        public IActionResult GetById(int id)
         {
             var cmd = _repo.GetRobotCommandById(id);
             return cmd is null
-                ? NotFound($"Command with ID {id} not found.")
+                ? NotFound($"Command {id} not found.")
                 : Ok(cmd);
         }
 
-        /// <summary>
-        /// Creates a new robot command.
-        /// </summary>
-        /// <param name="newCmd">The command object to create.</param>
-        /// <remarks>
-        /// Sample request:
-        ///
-        ///     POST /api/robot-commands
-        ///     {
-        ///       "name": "MoveForward",
-        ///       "isMoveCommand": true,
-        ///       "description": "Step ahead"
-        ///     }
-        ///
-        /// </remarks>
+        /// <summary>POST /api/robot-commands → create command.</summary>
         [HttpPost]
+        [Authorize(Policy = "AdminOnly")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status409Conflict)]
-        public IActionResult AddRobotCommand([FromBody] RobotCommand newCmd)
+        public IActionResult Create([FromBody] RobotCommand cmd)
         {
-            if (newCmd is null)
-                return BadRequest("Request body required.");
-
-            if (_repo.GetRobotCommands()
-                     .Any(c => c.Name.Equals(newCmd.Name, StringComparison.OrdinalIgnoreCase)))
-            {
-                return Conflict($"Command '{newCmd.Name}' already exists.");
-            }
-
-            var created = _repo.AddRobotCommand(newCmd);
-            return CreatedAtRoute("GetRobotCommand",
-                                  new { id = created.Id },
-                                  created);
+            if (cmd == null) return BadRequest("Body cannot be null.");
+            cmd.CreatedDate = DateTime.UtcNow;
+            cmd.ModifiedDate = cmd.CreatedDate;
+            var created = _repo.AddRobotCommand(cmd);
+            return CreatedAtRoute("GetRobotCommand", new { id = created.Id }, created);
         }
 
-        /// <summary>
-        /// Updates an existing robot command.
-        /// </summary>
-        /// <param name="id">ID of the command to update.</param>
-        /// <param name="upd">Updated command object (must match ID in URL).</param>
+        /// <summary>PUT /api/robot-commands/{id} → update command.</summary>
         [HttpPut("{id}")]
+        [Authorize(Policy = "AdminOnly")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult UpdateRobotCommand(int id, [FromBody] RobotCommand upd)
+        public IActionResult Update(int id, [FromBody] RobotCommand cmd)
         {
-            if (upd is null || upd.Id != id)
-                return BadRequest("ID mismatch or body missing.");
+            if (cmd == null || cmd.Id != id)
+                return BadRequest("ID mismatch or null body.");
 
-            if (_repo.GetRobotCommandById(id) is null)
-                return NotFound($"Command with ID {id} not found.");
+            var existing = _repo.GetRobotCommandById(id);
+            if (existing is null)
+                return NotFound($"Command {id} not found.");
 
-            upd.ModifiedDate = DateTime.Now;
-            return _repo.UpdateRobotCommand(upd)
-                ? NoContent()
-                : StatusCode(500, "Update failed.");
+            cmd.ModifiedDate = DateTime.UtcNow;
+            _repo.UpdateRobotCommand(id, cmd);
+            return NoContent();
         }
 
-        /// <summary>
-        /// Deletes a robot command by ID.
-        /// </summary>
-        /// <param name="id">ID of the command to delete.</param>
+        /// <summary>DELETE /api/robot-commands/{id} → remove command.</summary>
         [HttpDelete("{id}")]
+        [Authorize(Policy = "AdminOnly")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult DeleteRobotCommand(int id)
-            => _repo.DeleteRobotCommand(id)
+        public IActionResult Delete(int id)
+        {
+            var deleted = _repo.DeleteRobotCommand(id);
+            return deleted
                 ? NoContent()
-                : NotFound($"Command with ID {id} not found.");
+                : NotFound($"Command {id} not found.");
+        }
     }
 }
