@@ -1,67 +1,67 @@
 {
   "Files": [
     {
-      "Id": "/Users/lakishwijewardene/Documents/Projects/robot-controller-api-6.1P/wwwroot/fonts/OpenDyslexic-Bold.otf",
+      "Id": "/Users/lakishwijewardene/Documents/Projects/robot-controller-api-6.1C/wwwroot/fonts/OpenDyslexic-Bold.otf",
       "PackagePath": "staticwebassets/fonts/OpenDyslexic-Bold.otf"
     },
     {
-      "Id": "/Users/lakishwijewardene/Documents/Projects/robot-controller-api-6.1P/wwwroot/fonts/OpenDyslexic-Bold.woff2",
+      "Id": "/Users/lakishwijewardene/Documents/Projects/robot-controller-api-6.1C/wwwroot/fonts/OpenDyslexic-Bold.woff2",
       "PackagePath": "staticwebassets/fonts/OpenDyslexic-Bold.woff2"
     },
     {
-      "Id": "/Users/lakishwijewardene/Documents/Projects/robot-controller-api-6.1P/wwwroot/fonts/OpenDyslexic-Regular.otf",
+      "Id": "/Users/lakishwijewardene/Documents/Projects/robot-controller-api-6.1C/wwwroot/fonts/OpenDyslexic-Regular.otf",
       "PackagePath": "staticwebassets/fonts/OpenDyslexic-Regular.otf"
     },
     {
-      "Id": "/Users/lakishwijewardene/Documents/Projects/robot-controller-api-6.1P/wwwroot/fonts/OpenDyslexic-Regular.woff2",
+      "Id": "/Users/lakishwijewardene/Documents/Projects/robot-controller-api-6.1C/wwwroot/fonts/OpenDyslexic-Regular.woff2",
       "PackagePath": "staticwebassets/fonts/OpenDyslexic-Regular.woff2"
     },
     {
-      "Id": "/Users/lakishwijewardene/Documents/Projects/robot-controller-api-6.1P/wwwroot/images/deakin-logo.png",
+      "Id": "/Users/lakishwijewardene/Documents/Projects/robot-controller-api-6.1C/wwwroot/images/deakin-logo.png",
       "PackagePath": "staticwebassets/images/deakin-logo.png"
     },
     {
-      "Id": "/Users/lakishwijewardene/Documents/Projects/robot-controller-api-6.1P/wwwroot/styles/robot.css",
+      "Id": "/Users/lakishwijewardene/Documents/Projects/robot-controller-api-6.1C/wwwroot/styles/robot.css",
       "PackagePath": "staticwebassets/styles/robot.css"
     },
     {
-      "Id": "/Users/lakishwijewardene/Documents/Projects/robot-controller-api-6.1P/wwwroot/styles/theme-feeling-blue.css",
+      "Id": "/Users/lakishwijewardene/Documents/Projects/robot-controller-api-6.1C/wwwroot/styles/theme-feeling-blue.css",
       "PackagePath": "staticwebassets/styles/theme-feeling-blue.css"
     },
     {
-      "Id": "/Users/lakishwijewardene/Documents/Projects/robot-controller-api-6.1P/wwwroot/styles/theme-flattop.css",
+      "Id": "/Users/lakishwijewardene/Documents/Projects/robot-controller-api-6.1C/wwwroot/styles/theme-flattop.css",
       "PackagePath": "staticwebassets/styles/theme-flattop.css"
     },
     {
-      "Id": "/Users/lakishwijewardene/Documents/Projects/robot-controller-api-6.1P/wwwroot/styles/theme-material.css",
+      "Id": "/Users/lakishwijewardene/Documents/Projects/robot-controller-api-6.1C/wwwroot/styles/theme-material.css",
       "PackagePath": "staticwebassets/styles/theme-material.css"
     },
     {
-      "Id": "/Users/lakishwijewardene/Documents/Projects/robot-controller-api-6.1P/wwwroot/styles/theme-monokai.css",
+      "Id": "/Users/lakishwijewardene/Documents/Projects/robot-controller-api-6.1C/wwwroot/styles/theme-monokai.css",
       "PackagePath": "staticwebassets/styles/theme-monokai.css"
     },
     {
-      "Id": "/Users/lakishwijewardene/Documents/Projects/robot-controller-api-6.1P/wwwroot/styles/theme-muted.css",
+      "Id": "/Users/lakishwijewardene/Documents/Projects/robot-controller-api-6.1C/wwwroot/styles/theme-muted.css",
       "PackagePath": "staticwebassets/styles/theme-muted.css"
     },
     {
-      "Id": "/Users/lakishwijewardene/Documents/Projects/robot-controller-api-6.1P/wwwroot/styles/theme-newspaper.css",
+      "Id": "/Users/lakishwijewardene/Documents/Projects/robot-controller-api-6.1C/wwwroot/styles/theme-newspaper.css",
       "PackagePath": "staticwebassets/styles/theme-newspaper.css"
     },
     {
-      "Id": "/Users/lakishwijewardene/Documents/Projects/robot-controller-api-6.1P/wwwroot/styles/theme-outline.css",
+      "Id": "/Users/lakishwijewardene/Documents/Projects/robot-controller-api-6.1C/wwwroot/styles/theme-outline.css",
       "PackagePath": "staticwebassets/styles/theme-outline.css"
     },
     {
-      "Id": "/Users/lakishwijewardene/Documents/Projects/robot-controller-api-6.1P/wwwroot/swagger/favicon-16x16.png",
+      "Id": "/Users/lakishwijewardene/Documents/Projects/robot-controller-api-6.1C/wwwroot/swagger/favicon-16x16.png",
       "PackagePath": "staticwebassets/swagger/favicon-16x16.png"
     },
     {
-      "Id": "/Users/lakishwijewardene/Documents/Projects/robot-controller-api-6.1P/wwwroot/swagger/favicon-32x32.png",
+      "Id": "/Users/lakishwijewardene/Documents/Projects/robot-controller-api-6.1C/wwwroot/swagger/favicon-32x32.png",
       "PackagePath": "staticwebassets/swagger/favicon-32x32.png"
     },
     {
-      "Id": "/Users/lakishwijewardene/Documents/Projects/robot-controller-api-6.1P/wwwroot/swagger/favicon.ico",
+      "Id": "/Users/lakishwijewardene/Documents/Projects/robot-controller-api-6.1C/wwwroot/swagger/favicon.ico",
       "PackagePath": "staticwebassets/swagger/favicon.ico"
     },
     {

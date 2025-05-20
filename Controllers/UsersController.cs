@@ -1,10 +1,10 @@
 using System;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using robot_controller_api.Models;
 using robot_controller_api.Persistence;
+using robot_controller_api.Services;
 
 namespace robot_controller_api.Controllers
 {
@@ -17,11 +17,14 @@ namespace robot_controller_api.Controllers
     public class UsersController : ControllerBase
     {
         private readonly IUserDataAccess _userRepo;
-        private readonly PasswordHasher<UserModel> _hasher = new();
+        private readonly IPasswordHasherService _passwordHasher;
 
-        public UsersController(IUserDataAccess userRepo)
+        public UsersController(
+            IUserDataAccess userRepo,
+            IPasswordHasherService passwordHasher)    // ← injected
         {
             _userRepo = userRepo;
+            _passwordHasher = passwordHasher;          // ← assign
         }
 
         /// <summary>
@@ -85,7 +88,7 @@ namespace robot_controller_api.Controllers
             model.ModifiedDate = model.CreatedDate;
 
             // Hash the incoming PasswordHash field (which holds plain password)
-            model.PasswordHash = _hasher.HashPassword(model, model.PasswordHash);
+            model.PasswordHash = _passwordHasher.HashPassword(model, model.PasswordHash);
 
             var created = _userRepo.Create(model);
             return CreatedAtAction(
@@ -105,23 +108,19 @@ namespace robot_controller_api.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult Update(int id, [FromBody] UserUpdateModel m)
         {
-            // 1) Ensure user exists
             var existing = _userRepo.GetById(id);
             if (existing is null)
                 return NotFound($"User {id} not found.");
 
-            // 2) Validate incoming model
             if (!ModelState.IsValid)
                 return ValidationProblem(ModelState);
 
-            // 3) Copy only the allowed fields
             existing.FirstName = m.FirstName;
             existing.LastName = m.LastName;
             existing.Description = m.Description;
             existing.Role = m.Role;
             existing.ModifiedDate = DateTime.UtcNow;
 
-            // 4) Persist change
             _userRepo.Update(existing);
 
             return NoContent();
@@ -160,16 +159,14 @@ namespace robot_controller_api.Controllers
             if (existing is null)
                 return NotFound($"User {id} not found.");
 
-            // If email is changing, ensure uniqueness
             if (!string.Equals(existing.Email, creds.Email, StringComparison.OrdinalIgnoreCase)
                 && _userRepo.EmailExists(creds.Email))
             {
                 return Conflict("Email already in use.");
             }
 
-            // Apply changes
             existing.Email = creds.Email;
-            existing.PasswordHash = _hasher.HashPassword(existing, creds.Password);
+            existing.PasswordHash = _passwordHasher.HashPassword(existing, creds.Password);
             existing.ModifiedDate = DateTime.UtcNow;
 
             _userRepo.Update(existing);

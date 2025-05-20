@@ -2,6 +2,19 @@
   "version": 3,
   "targets": {
     "net8.0": {
+      "BCrypt.Net-Next/4.0.3": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/BCrypt.Net-Next.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/BCrypt.Net-Next.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "FastMember.Signed/1.5.0": {
         "type": "package",
         "compile": {
@@ -155,6 +168,37 @@
     }
   },
   "libraries": {
+    "BCrypt.Net-Next/4.0.3": {
+      "sha512": "W+U9WvmZQgi5cX6FS5GDtDoPzUCV4LkBLkywq/kRZhuDwcbavOzcDAr3LXJFqHUi952Yj3LEYoWW0jbEUQChsA==",
+      "type": "package",
+      "path": "bcrypt.net-next/4.0.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "bcrypt.net-next.4.0.3.nupkg.sha512",
+        "bcrypt.net-next.nuspec",
+        "ico.png",
+        "lib/net20/BCrypt.Net-Next.dll",
+        "lib/net20/BCrypt.Net-Next.xml",
+        "lib/net35/BCrypt.Net-Next.dll",
+        "lib/net35/BCrypt.Net-Next.xml",
+        "lib/net462/BCrypt.Net-Next.dll",
+        "lib/net462/BCrypt.Net-Next.xml",
+        "lib/net472/BCrypt.Net-Next.dll",
+        "lib/net472/BCrypt.Net-Next.xml",
+        "lib/net48/BCrypt.Net-Next.dll",
+        "lib/net48/BCrypt.Net-Next.xml",
+        "lib/net5.0/BCrypt.Net-Next.dll",
+        "lib/net5.0/BCrypt.Net-Next.xml",
+        "lib/net6.0/BCrypt.Net-Next.dll",
+        "lib/net6.0/BCrypt.Net-Next.xml",
+        "lib/netstandard2.0/BCrypt.Net-Next.dll",
+        "lib/netstandard2.0/BCrypt.Net-Next.xml",
+        "lib/netstandard2.1/BCrypt.Net-Next.dll",
+        "lib/netstandard2.1/BCrypt.Net-Next.xml",
+        "readme.md"
+      ]
+    },
     "FastMember.Signed/1.5.0": {
       "sha512": "tZofx7AYyAI6w2kvbf/QjpEAC/A4cLInv1WSlMgISTIxGtgU8IUMvW3Y3Alkdx3atgaRxRch/SU6fmzjVmyYog==",
       "type": "package",
@@ -596,6 +640,7 @@
   },
   "projectFileDependencyGroups": {
     "net8.0": [
+      "BCrypt.Net-Next >= 4.0.3",
       "FastMember.Signed >= 1.5.0",
       "Microsoft.AspNetCore.OpenApi >= 8.0.14",
       "Npgsql >= 7.0.7",
@@ -608,11 +653,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/lakishwijewardene/Documents/Projects/robot-controller-api-6.1P/robot-controller-api.csproj",
+      "projectUniqueName": "/Users/lakishwijewardene/Documents/Projects/robot-controller-api-6.1C/robot-controller-api.csproj",
       "projectName": "robot-controller-api",
-      "projectPath": "/Users/lakishwijewardene/Documents/Projects/robot-controller-api-6.1P/robot-controller-api.csproj",
+      "projectPath": "/Users/lakishwijewardene/Documents/Projects/robot-controller-api-6.1C/robot-controller-api.csproj",
       "packagesPath": "/Users/lakishwijewardene/.nuget/packages/",
-      "outputPath": "/Users/lakishwijewardene/Documents/Projects/robot-controller-api-6.1P/obj/",
+      "outputPath": "/Users/lakishwijewardene/Documents/Projects/robot-controller-api-6.1C/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/lakishwijewardene/.nuget/NuGet/NuGet.Config"
@@ -645,6 +690,10 @@
       "net8.0": {
         "targetAlias": "net8.0",
         "dependencies": {
+          "BCrypt.Net-Next": {
+            "target": "Package",
+            "version": "[4.0.3, )"
+          },
           "FastMember.Signed": {
             "target": "Package",
             "version": "[1.5.0, )"

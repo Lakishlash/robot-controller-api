@@ -9,11 +9,6 @@
             Handles HTTP Basic Authentication against our Users table.
             </summary>
         </member>
-        <member name="M:robot_controller_api.Authentication.BasicAuthenticationHandler.HandleAuthenticateAsync">
-            <summary>
-            Authenticate a request by parsing the Authorization header.
-            </summary>
-        </member>
         <member name="T:robot_controller_api.Controllers.MapsController">
             <summary>
             CRUD, filters and coordinate checks for maps.
@@ -301,6 +296,23 @@
         </member>
         <member name="M:robot_controller_api.Persistence.UserRepository.Delete(System.Int32)">
             <inheritdoc/>
+        </member>
+        <member name="M:robot_controller_api.Services.IPasswordHasherService.HashPassword(robot_controller_api.Models.UserModel,System.String)">
+            <summary>
+            Hashes the given plain-text password for the specified user.
+            </summary>
+            <param name="user">The user record (in case you want to include user-specific data in your salt/rounds).</param>
+            <param name="plainPassword">The password to hash.</param>
+            <returns>A salted, hashed password string.</returns>
+        </member>
+        <member name="M:robot_controller_api.Services.IPasswordHasherService.VerifyHashedPassword(robot_controller_api.Models.UserModel,System.String,System.String)">
+            <summary>
+            Verifies that the provided plain-text password matches the stored hash.
+            </summary>
+            <param name="user">The user record (if needed by your algorithm).</param>
+            <param name="hashedPassword">The stored hashed password.</param>
+            <param name="providedPassword">The plain password to verify.</param>
+            <returns>True if it matches; false otherwise.</returns>
         </member>
     </members>
 </doc>

@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "TuSPkCCFf7U=",
+  "dgSpecHash": "ogZpxgRNzIQ=",
   "success": true,
-  "projectFilePath": "/Users/lakishwijewardene/Documents/Projects/robot-controller-api-6.1P/robot-controller-api.csproj",
+  "projectFilePath": "/Users/lakishwijewardene/Documents/Projects/robot-controller-api-6.1C/robot-controller-api.csproj",
   "expectedPackageFiles": [
+    "/Users/lakishwijewardene/.nuget/packages/bcrypt.net-next/4.0.3/bcrypt.net-next.4.0.3.nupkg.sha512",
     "/Users/lakishwijewardene/.nuget/packages/fastmember.signed/1.5.0/fastmember.signed.1.5.0.nupkg.sha512",
     "/Users/lakishwijewardene/.nuget/packages/microsoft.aspnetcore.openapi/8.0.14/microsoft.aspnetcore.openapi.8.0.14.nupkg.sha512",
     "/Users/lakishwijewardene/.nuget/packages/microsoft.extensions.apidescription.server/6.0.5/microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",

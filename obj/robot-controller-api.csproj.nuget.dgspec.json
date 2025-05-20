@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/lakishwijewardene/Documents/Projects/robot-controller-api-6.1P/robot-controller-api.csproj": {}
+    "/Users/lakishwijewardene/Documents/Projects/robot-controller-api-6.1C/robot-controller-api.csproj": {}
   },
   "projects": {
-    "/Users/lakishwijewardene/Documents/Projects/robot-controller-api-6.1P/robot-controller-api.csproj": {
+    "/Users/lakishwijewardene/Documents/Projects/robot-controller-api-6.1C/robot-controller-api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/lakishwijewardene/Documents/Projects/robot-controller-api-6.1P/robot-controller-api.csproj",
+        "projectUniqueName": "/Users/lakishwijewardene/Documents/Projects/robot-controller-api-6.1C/robot-controller-api.csproj",
         "projectName": "robot-controller-api",
-        "projectPath": "/Users/lakishwijewardene/Documents/Projects/robot-controller-api-6.1P/robot-controller-api.csproj",
+        "projectPath": "/Users/lakishwijewardene/Documents/Projects/robot-controller-api-6.1C/robot-controller-api.csproj",
         "packagesPath": "/Users/lakishwijewardene/.nuget/packages/",
-        "outputPath": "/Users/lakishwijewardene/Documents/Projects/robot-controller-api-6.1P/obj/",
+        "outputPath": "/Users/lakishwijewardene/Documents/Projects/robot-controller-api-6.1C/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/lakishwijewardene/.nuget/NuGet/NuGet.Config"
@@ -44,6 +44,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "BCrypt.Net-Next": {
+              "target": "Package",
+              "version": "[4.0.3, )"
+            },
             "FastMember.Signed": {
               "target": "Package",
               "version": "[1.5.0, )"

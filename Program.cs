@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using robot_controller_api.Authentication;
 using robot_controller_api.Persistence;
+using robot_controller_api.Services; // ← new
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,13 +19,18 @@ var builder = WebApplication.CreateBuilder(args);
 // Register repository‐pattern implementations for dependency injection
 // ----------------------------------------------------------------------------
 builder.Services.AddScoped<IRobotCommandDataAccess, RobotCommandRepository>();
-builder.Services.AddScoped<IMapDataAccess,        MapRepository>();
-builder.Services.AddScoped<IUserDataAccess,       UserRepository>();
+builder.Services.AddScoped<IMapDataAccess, MapRepository>();
+builder.Services.AddScoped<IUserDataAccess, UserRepository>();
 
 // ----------------------------------------------------------------------------
 // Add MVC controllers
 // ----------------------------------------------------------------------------
 builder.Services.AddControllers();
+
+// ----------------------------------------------------------------------------
+// Register our new password‐hasher service for Credit level
+// ----------------------------------------------------------------------------
+builder.Services.AddScoped<IPasswordHasherService, BcryptPasswordHasherService>();
 
 // ----------------------------------------------------------------------------
 // Configure Basic Authentication & Authorization policies
@@ -52,12 +58,12 @@ builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1", new OpenApiInfo
     {
-        Title       = "Robot Controller API",
-        Version     = "v1",
+        Title = "Robot Controller API",
+        Version = "v1",
         Description = "Backend service for Moon robot simulator.",
-        Contact     = new OpenApiContact
+        Contact = new OpenApiContact
         {
-            Name  = "Lakmal Wijewardene",
+            Name = "Lakmal Wijewardene",
             Email = "lakishwijewardene@gmail.com"
         }
     });
@@ -71,16 +77,16 @@ builder.Services.AddSwaggerGen(options =>
     // BasicAuth scheme for Swagger
     options.AddSecurityDefinition("basic", new OpenApiSecurityScheme
     {
-        Type        = SecuritySchemeType.Http,
-        Scheme      = "basic",
+        Type = SecuritySchemeType.Http,
+        Scheme = "basic",
         Description = "Enter your username and password"
     });
     options.AddSecurityRequirement(new OpenApiSecurityRequirement
     {
         {
-            new OpenApiSecurityScheme 
+            new OpenApiSecurityScheme
             {
-                Reference = new OpenApiReference 
+                Reference = new OpenApiReference
                 {
                     Type = ReferenceType.SecurityScheme,
                     Id   = "basic"
