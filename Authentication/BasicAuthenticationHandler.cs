@@ -4,6 +4,7 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;               // ← added
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using robot_controller_api.Models;
@@ -21,7 +22,6 @@ namespace robot_controller_api.Authentication
         private readonly IUserDataAccess _userRepo;
         private readonly IPasswordHasherService _passwordHasher;
 
-        // Notice: no ISystemClock parameter here, and we call base(...) without it
         public BasicAuthenticationHandler(
             IOptionsMonitor<AuthenticationSchemeOptions> options,
             ILoggerFactory logger,
@@ -36,7 +36,12 @@ namespace robot_controller_api.Authentication
 
         protected override Task<AuthenticateResult> HandleAuthenticateAsync()
         {
-            // Advertise Basic realm
+            // 0) If [AllowAnonymous] is on this endpoint, skip authentication entirely
+            var endpoint = Context.GetEndpoint();
+            if (endpoint?.Metadata?.GetMetadata<IAllowAnonymous>() != null)
+                return Task.FromResult(AuthenticateResult.NoResult());
+
+            // 1) Advertise Basic realm
             Response.Headers.Append(
                 "WWW-Authenticate",
                 @"Basic realm=""Access to the robot controller."""
