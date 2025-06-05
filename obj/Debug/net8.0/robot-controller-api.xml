@@ -1,0 +1,281 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>robot-controller-api</name>
+    </assembly>
+    <members>
+        <member name="T:robot_controller_api.Authentication.BasicAuthenticationHandler">
+            <summary>
+            Handles HTTP Basic Authentication against our Users table.
+            </summary>
+        </member>
+        <member name="T:robot_controller_api.Controllers.MapsController">
+            <summary>
+            CRUD, filters and coordinate checks for maps.
+            </summary>
+        </member>
+        <member name="M:robot_controller_api.Controllers.MapsController.GetAll">
+            <summary>GET /api/maps → all maps.</summary>
+        </member>
+        <member name="M:robot_controller_api.Controllers.MapsController.GetSquares">
+            <summary>GET /api/maps/square → only square maps.</summary>
+        </member>
+        <member name="M:robot_controller_api.Controllers.MapsController.GetById(System.Int32)">
+            <summary>GET /api/maps/{id} → single map.</summary>
+        </member>
+        <member name="M:robot_controller_api.Controllers.MapsController.CheckCoordinate(System.Int32,System.Int32,System.Int32)">
+            <summary>GET /api/maps/{id}/{x}-{y} → coordinate check.</summary>
+        </member>
+        <member name="M:robot_controller_api.Controllers.MapsController.Create(robot_controller_api.Models.Map)">
+            <summary>POST /api/maps → create map.</summary>
+        </member>
+        <member name="M:robot_controller_api.Controllers.MapsController.Update(System.Int32,robot_controller_api.Models.Map)">
+            <summary>PUT /api/maps/{id} → update map.</summary>
+        </member>
+        <member name="M:robot_controller_api.Controllers.MapsController.Delete(System.Int32)">
+            <summary>DELETE /api/maps/{id} → remove map.</summary>
+        </member>
+        <member name="T:robot_controller_api.Controllers.RobotCommandsController">
+            <summary>
+            CRUD and filters for robot commands.
+            </summary>
+        </member>
+        <member name="M:robot_controller_api.Controllers.RobotCommandsController.GetAll">
+            <summary>GET /api/robot-commands → all commands.</summary>
+        </member>
+        <member name="M:robot_controller_api.Controllers.RobotCommandsController.GetMoves">
+            <summary>GET /api/robot-commands/move → move commands only.</summary>
+        </member>
+        <member name="M:robot_controller_api.Controllers.RobotCommandsController.GetById(System.Int32)">
+            <summary>GET /api/robot-commands/{id} → single command.</summary>
+        </member>
+        <member name="M:robot_controller_api.Controllers.RobotCommandsController.Create(robot_controller_api.Models.RobotCommand)">
+            <summary>POST /api/robot-commands → create command.</summary>
+        </member>
+        <member name="M:robot_controller_api.Controllers.RobotCommandsController.Update(System.Int32,robot_controller_api.Models.RobotCommand)">
+            <summary>PUT /api/robot-commands/{id} → update command.</summary>
+        </member>
+        <member name="M:robot_controller_api.Controllers.RobotCommandsController.Delete(System.Int32)">
+            <summary>DELETE /api/robot-commands/{id} → remove command.</summary>
+        </member>
+        <member name="T:robot_controller_api.Controllers.UsersController">
+            <summary>
+            Handles registration, profile management and credential updates for users.
+            </summary>
+        </member>
+        <member name="M:robot_controller_api.Controllers.UsersController.ForUsersStartingWithA">
+            <summary>
+            Only accessible to users whose first name starts with A (policy enforced)
+            </summary>
+        </member>
+        <member name="T:robot_controller_api.Models.LoginModel">
+            <summary>
+            Credentials payload for email/password operations.
+            </summary>
+        </member>
+        <member name="P:robot_controller_api.Models.LoginModel.Email">
+            <summary>New or existing email.</summary>
+        </member>
+        <member name="P:robot_controller_api.Models.LoginModel.Password">
+            <summary>Plain‐text password to hash or verify.</summary>
+        </member>
+        <member name="T:robot_controller_api.Models.UserModel">
+            <summary>
+            Represents an application user for authentication and authorization.
+            </summary>
+        </member>
+        <member name="P:robot_controller_api.Models.UserModel.Id">
+            <summary>Primary key.</summary>
+        </member>
+        <member name="P:robot_controller_api.Models.UserModel.Email">
+            <summary>User’s unique email (login).</summary>
+        </member>
+        <member name="P:robot_controller_api.Models.UserModel.FirstName">
+            <summary>First name.</summary>
+        </member>
+        <member name="P:robot_controller_api.Models.UserModel.LastName">
+            <summary>Last name.</summary>
+        </member>
+        <member name="P:robot_controller_api.Models.UserModel.PasswordHash">
+            <summary>Hashed password (via PasswordHasher).</summary>
+        </member>
+        <member name="P:robot_controller_api.Models.UserModel.Description">
+            <summary>Optional bio/description.</summary>
+        </member>
+        <member name="P:robot_controller_api.Models.UserModel.Role">
+            <summary>Role for authorization (“Admin” or “User”).</summary>
+        </member>
+        <member name="P:robot_controller_api.Models.UserModel.CreatedDate">
+            <summary>UTC created timestamp.</summary>
+        </member>
+        <member name="P:robot_controller_api.Models.UserModel.ModifiedDate">
+            <summary>UTC last‐modified timestamp.</summary>
+        </member>
+        <member name="T:robot_controller_api.Models.UserUpdateModel">
+            <summary>
+            Payload for updating a user’s profile fields only.
+            </summary>
+        </member>
+        <member name="P:robot_controller_api.Models.UserUpdateModel.FirstName">
+            <summary>First name.</summary>
+        </member>
+        <member name="P:robot_controller_api.Models.UserUpdateModel.LastName">
+            <summary>Last name.</summary>
+        </member>
+        <member name="P:robot_controller_api.Models.UserUpdateModel.Description">
+            <summary>Optional bio/description.</summary>
+        </member>
+        <member name="P:robot_controller_api.Models.UserUpdateModel.Role">
+            <summary>Role for authorization (“Admin” or “User”).</summary>
+        </member>
+        <member name="T:robot_controller_api.Persistence.ExtensionMethods">
+            <summary>
+            Extension methods for ADO data mapping
+            </summary>
+        </member>
+        <member name="M:robot_controller_api.Persistence.ExtensionMethods.MapTo``1(Npgsql.NpgsqlDataReader,``0)">
+            <summary>
+            Maps the current row of an NpgsqlDataReader onto an entity instance using FastMember
+            </summary>
+        </member>
+        <member name="T:robot_controller_api.Persistence.IMapDataAccess">
+            <summary>
+            Data access abstraction for Map entities, matching the PostgreSQL schema.
+            </summary>
+        </member>
+        <member name="M:robot_controller_api.Persistence.IMapDataAccess.GetMaps">
+            <summary>
+            Retrieve all maps.
+            </summary>
+        </member>
+        <member name="M:robot_controller_api.Persistence.IMapDataAccess.GetSquareMaps">
+            <summary>
+            Retrieve only maps that are square (rows == columns).
+            </summary>
+        </member>
+        <member name="M:robot_controller_api.Persistence.IMapDataAccess.GetMapById(System.Int32)">
+            <summary>
+            Retrieve a single map by its ID.
+            </summary>
+            <param name="id">The map’s ID.</param>
+            <returns>The <see cref="T:robot_controller_api.Models.Map"/>, or <c>null</c> if not found.</returns>
+        </member>
+        <member name="M:robot_controller_api.Persistence.IMapDataAccess.AddMap(robot_controller_api.Models.Map)">
+            <summary>
+            Add a new map to the database.
+            </summary>
+            <param name="mapModel">The map to add.</param>
+            <returns>The newly created <see cref="T:robot_controller_api.Models.Map"/>, including its assigned ID.</returns>
+        </member>
+        <member name="M:robot_controller_api.Persistence.IMapDataAccess.UpdateMap(System.Int32,robot_controller_api.Models.Map)">
+            <summary>
+            Update an existing map.
+            </summary>
+            <param name="id">ID of the map to update.</param>
+            <param name="mapModel">New map data.</param>
+        </member>
+        <member name="M:robot_controller_api.Persistence.IMapDataAccess.DeleteMap(System.Int32)">
+            <summary>
+            Delete a map by ID.
+            </summary>
+            <param name="id">ID of the map to remove.</param>
+            <returns><c>true</c> if a row was deleted; otherwise <c>false</c>.</returns>
+        </member>
+        <member name="M:robot_controller_api.Persistence.IMapDataAccess.CheckCoordinate(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Check whether the given (x,y) coordinate lies inside the bounds of the map.
+            </summary>
+            <param name="id">Map ID.</param>
+            <param name="x">Column coordinate (0–Columns-1).</param>
+            <param name="y">Row coordinate (0–Rows-1).</param>
+            <returns><c>true</c> if the coordinate is on the map; otherwise <c>false</c>.</returns>
+        </member>
+        <member name="M:robot_controller_api.Persistence.IRepository.ExecuteReader``1(System.String,Npgsql.NpgsqlParameter[])">
+            <summary>
+            Executes the given SQL command and maps each row into a new T via FastMember
+            </summary>
+        </member>
+        <member name="T:robot_controller_api.Persistence.IRobotCommandDataAccess">
+            <summary>
+            CRUD and filters for RobotCommand.
+            </summary>
+        </member>
+        <member name="T:robot_controller_api.Persistence.IUserDataAccess">
+            <summary>
+            CRUD for UserModel (login, profile, roles).
+            </summary>
+        </member>
+        <member name="T:robot_controller_api.Persistence.MapRepository">
+            <summary>
+            ADO.NET-style repository for Map, matching your Postgres schema.
+            </summary>
+        </member>
+        <member name="M:robot_controller_api.Persistence.MapRepository.Map(Npgsql.NpgsqlDataReader)">
+            <summary>Helper: map one data-row → Map.</summary>
+        </member>
+        <member name="T:robot_controller_api.Persistence.RobotCommandRepository">
+            <summary>
+            Repository pattern for RobotCommand, using ADO.NET.
+            </summary>
+        </member>
+        <member name="M:robot_controller_api.Persistence.RobotCommandRepository.Map(Npgsql.NpgsqlDataReader)">
+            <summary>robotcommand row → RobotCommand.</summary>
+        </member>
+        <member name="T:robot_controller_api.Persistence.UserRepository">
+            <summary>
+            Repository-pattern implementation of IUserDataAccess for Users.
+            </summary>
+        </member>
+        <member name="M:robot_controller_api.Persistence.UserRepository.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Read the DefaultConnection from appsettings.json.
+            </summary>
+        </member>
+        <member name="M:robot_controller_api.Persistence.UserRepository.Map(Npgsql.NpgsqlDataReader)">
+            <summary>
+            Map a data-reader row to a UserModel.
+            </summary>
+        </member>
+        <member name="M:robot_controller_api.Persistence.UserRepository.GetAll">
+            <inheritdoc/>
+        </member>
+        <member name="M:robot_controller_api.Persistence.UserRepository.GetByRole(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:robot_controller_api.Persistence.UserRepository.GetById(System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:robot_controller_api.Persistence.UserRepository.GetByEmail(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:robot_controller_api.Persistence.UserRepository.EmailExists(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:robot_controller_api.Persistence.UserRepository.Create(robot_controller_api.Models.UserModel)">
+            <inheritdoc/>
+        </member>
+        <member name="M:robot_controller_api.Persistence.UserRepository.Update(robot_controller_api.Models.UserModel)">
+            <inheritdoc/>
+        </member>
+        <member name="M:robot_controller_api.Persistence.UserRepository.Delete(System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:robot_controller_api.Services.IPasswordHasherService.HashPassword(robot_controller_api.Models.UserModel,System.String)">
+            <summary>
+            Hashes the given plain-text password for the specified user.
+            </summary>
+            <param name="user">The user record (in case you want to include user-specific data in your salt/rounds).</param>
+            <param name="plainPassword">The password to hash.</param>
+            <returns>A salted, hashed password string.</returns>
+        </member>
+        <member name="M:robot_controller_api.Services.IPasswordHasherService.VerifyHashedPassword(robot_controller_api.Models.UserModel,System.String,System.String)">
+            <summary>
+            Verifies that the provided plain-text password matches the stored hash.
+            </summary>
+            <param name="user">The user record (if needed by your algorithm).</param>
+            <param name="hashedPassword">The stored hashed password.</param>
+            <param name="providedPassword">The plain password to verify.</param>
+            <returns>True if it matches; false otherwise.</returns>
+        </member>
+    </members>
+</doc>
