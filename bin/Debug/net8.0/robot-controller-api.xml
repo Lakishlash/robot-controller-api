@@ -79,6 +79,11 @@
         <member name="P:robot_controller_api.Models.LoginModel.Password">
             <summary>Plain‐text password to hash or verify.</summary>
         </member>
+        <member name="T:robot_controller_api.Models.UserCredentialUpdateModel">
+            <summary>
+            Payload for updating user credentials (email and/or password).
+            </summary>
+        </member>
         <member name="T:robot_controller_api.Models.UserModel">
             <summary>
             Represents an application user for authentication and authorization.

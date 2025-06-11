@@ -109,6 +109,44 @@ namespace robot_controller_api.Controllers
             return NoContent();
         }
 
+        // PATCH: api/users/{id}/credentials (self or admin)
+        [HttpPatch("{id:int}/credentials")]
+        [Authorize(Policy = "UserOnly")]
+        public IActionResult PatchCredentials(int id, [FromBody] UserCredentialUpdateModel credentials)
+        {
+            if (credentials == null)
+                return BadRequest("Credentials object is null.");
+
+            var existing = _userRepo.GetById(id);
+            if (existing == null)
+                return NotFound($"User with ID {id} not found.");
+
+            bool changed = false;
+
+            // Only update email if provided
+            if (!string.IsNullOrWhiteSpace(credentials.Email))
+            {
+                existing.Email = credentials.Email;
+                changed = true;
+            }
+
+            // Only update password if provided
+            if (!string.IsNullOrWhiteSpace(credentials.Password))
+            {
+                existing.PasswordHash = _passwordHasher.HashPassword(existing, credentials.Password);
+                changed = true;
+            }
+
+            if (changed)
+            {
+                existing.ModifiedDate = DateTime.UtcNow;
+                _userRepo.Update(existing);
+            }
+
+            return NoContent();
+        }
+
+
         // DELETE: api/users/{id} (admin only)
         [HttpDelete("{id:int}")]
         [Authorize(Policy = "AdminOnly")]
@@ -121,7 +159,6 @@ namespace robot_controller_api.Controllers
             var deleted = _userRepo.Delete(id);
             return deleted ? NoContent() : StatusCode(StatusCodes.Status500InternalServerError, "Delete failed.");
         }
-
 
         /// <summary>
         /// Only accessible to users whose first name starts with A (policy enforced)
